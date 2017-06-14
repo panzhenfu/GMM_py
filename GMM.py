@@ -1,3 +1,6 @@
+# @author panzhenfu 2017/6/12
+# @email panzhenfu20@126.com
+
 #coding=utf-8
 import numpy as np
 import copy
