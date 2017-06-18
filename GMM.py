@@ -6,6 +6,7 @@
 import numpy as np
 import copy
 import matplotlib.pyplot as plt
+import scipy.io as sio
 
 def Gaussian_DN(X,U_Mean,Cov):
     D = np.shape(X)[0]
@@ -37,7 +38,7 @@ def maxLikelyhood(Xn, Pik, Uk, Cov):
         temp = 0
         for k_iter in range(K):
             gaussian = Gaussian_DN(Xn[:, n_iter], Uk[:, k_iter], Cov[k_iter])
-            print ("temp :", gaussian)
+            # print ("temp :", gaussian)
             probility_mat[n_iter, k_iter] = gaussian
             temp += Pik[0, k_iter] * gaussian
         Likelyhood += np.log(temp)
@@ -161,12 +162,21 @@ if __name__ == "__main__":
     alpha = [0.1, 0.4, 0.3, 0.2]  # 混合项系数
     X = generate_data(sigma_list, N, u1, u2, u3, u4, alpha)  # 生成数据
 
+    # 归一化
+    # min = X.min(0)
+    # max = X.max(0)
+    # for n_iter in range(N):
+    #     X[n_iter, :] = (X[n_iter, :]-min)/(max - min)
+    # 持久化
+    np.savetxt("filename.txt", X)
+
     iter_num = 5000  # 迭代次数
     Pi, Uk, list_cov = EMforMixGaussian(np.mat(X).T, k, iter_num)
 
     print (Uk)
     print (list_cov)
-    print (Pi)
+
+    print (Pi[0,0]+Pi[0,1]+Pi[0,2]+Pi[0,3])
       # 可视化结果
     # 画生成的原始数据
     plt.subplot(121)
