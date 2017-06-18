@@ -114,7 +114,7 @@ def EMforMixGaussian(InputData, K, MaxIter):
                 # print 'X_cov_new',X_cov_new
             List_cov_new.append(X_cov_new)
 
-        Likelyhood_new, _ = maxLikelyhood(X, pi_new, UK_new, List_cov)
+        Likelyhood_new, _ = maxLikelyhood(X, pi_new, UK_new, List_cov_new)
         print ('Likelyhood_new', Likelyhood_new, currentIter)
 
         if Likelyhood_old >= Likelyhood_new or currentIter > MaxIter:
