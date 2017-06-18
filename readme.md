@@ -1,4 +1,4 @@
-
+C++版的混合高斯模型运行条件：
 1.安装依赖库
 sudo apt-get install libopenblas-dev
 sudo apt-get install liblapack-dev
