@@ -1,11 +1,12 @@
+#coding=utf-8
 # @author panzhenfu 2017/6/12
 # @email panzhenfu20@126.com
 
-#coding=utf-8
+
 import numpy as np
 import copy
 import matplotlib.pyplot as plt
-# 单个高斯值
+
 def Gaussian_DN(X,U_Mean,Cov):
     D = np.shape(X)[0]
     Y = X-U_Mean
@@ -36,6 +37,7 @@ def maxLikelyhood(Xn, Pik, Uk, Cov):
         temp = 0
         for k_iter in range(K):
             gaussian = Gaussian_DN(Xn[:, n_iter], Uk[:, k_iter], Cov[k_iter])
+            print ("temp :", gaussian)
             probility_mat[n_iter, k_iter] = gaussian
             temp += Pik[0, k_iter] * gaussian
         Likelyhood += np.log(temp)
@@ -114,7 +116,7 @@ def EMforMixGaussian(InputData, K, MaxIter):
                 # print 'X_cov_new',X_cov_new
             List_cov_new.append(X_cov_new)
 
-        Likelyhood_new, _ = maxLikelyhood(X, pi_new, UK_new, List_cov_new)
+        Likelyhood_new, _ = maxLikelyhood(X, pi_new, UK_new, List_cov)
         print ('Likelyhood_new', Likelyhood_new, currentIter)
 
         if Likelyhood_old >= Likelyhood_new or currentIter > MaxIter:
